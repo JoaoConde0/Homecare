@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Home Care — Proposta de Desenvolvimento</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --ink:#2b028a;
+    --ink-soft:#2c3a4a;
+    --paper:#FAF5EC;
+    --card:#FFFFFF;
+    --clay:#BF6A3F;
+    --clay-dark:#8F4D2C;
+    --sage:#6F8F6A;
+    --sage-dark:#46603F;
+    --text:#2B2620;
+    --text-soft:#6B6357;
+    --border:#E3D9C4;
+    --radius:14px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+}
+
+h1,h2,h3{
+    font-family:'Fraunces',serif;
+    color:var(--ink);
+    font-weight:600;
+}
+
+.eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--clay);
+    font-weight:500;
+}
+
+.wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 6%;
+}
+
+/* ---------- HERO ---------- */
+
+header.hero{
+    background:var(--ink);
+    color:#F3ECDD;
+    padding:90px 0 70px;
+    position:relative;
+    overflow:hidden;
+}
+
+header.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        repeating-linear-gradient(0deg, rgba(243,236,221,0.035) 0px, rgba(243,236,221,0.035) 1px, transparent 1px, transparent 28px);
+    pointer-events:none;
+}
+
+.hero-inner{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:40px;
+    align-items:center;
+    position:relative;
+}
+
+header.hero .eyebrow{color:#D9A77C;}
+
+header.hero h1{
+    font-size:clamp(2.1rem,4.4vw,3.1rem);
+    color:#FBF8F1;
+    margin:14px 0 18px;
+    line-height:1.12;
+}
+
+header.hero p{
+    font-size:1.05rem;
+    max-width:520px;
+    color:#CFD9CE;
+}
+
+.hero-art{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-art svg{width:100%;height:auto;max-width:320px;}
+
+/* ---------- SECTIONS ---------- */
+
+section{padding:64px 0;}
+
+.section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:34px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:18px;
+}
+
+.section-head .index{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--clay);
+    font-size:0.85rem;
+}
+
+.section-head h2{font-size:1.7rem;}
+
+/* ---------- PROBLEMA: scattered notes ---------- */
+
+.scatter-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:26px;
+    padding:10px 0 6px;
+}
+
+.scatter-grid .note{
+    background:#FFFDF8;
+    border:1px solid var(--border);
+    border-top:3px solid var(--clay);
+    border-radius:4px;
+    padding:20px 20px 18px;
+    font-size:0.95rem;
+    color:var(--text-soft);
+    box-shadow:0 6px 14px rgba(43,38,32,0.06);
+}
+
+.scatter-grid .note:nth-child(1){transform:rotate(-2deg);}
+.scatter-grid .note:nth-child(2){transform:rotate(1.4deg);}
+.scatter-grid .note:nth-child(3){transform:rotate(-1deg);}
+.scatter-grid .note:nth-child(4){transform:rotate(2.2deg);}
+
+.scatter-grid .note strong{
+    display:block;
+    color:var(--ink);
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.02rem;
+    margin-bottom:6px;
+}
+
+/* ---------- FOLDER CARDS (solução / telas) ---------- */
+
+.folder-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:22px;
+}
+
+.folder-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:26px 22px;
+    position:relative;
+}
+
+.folder-card .tab{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--sage-dark);
+    background:#EAF0E6;
+    display:inline-block;
+    padding:3px 9px;
+    border-radius:3px;
+    margin-bottom:14px;
+}
+
+.folder-card h3{
+    font-size:1.12rem;
+    margin-bottom:8px;
+}
+
+.folder-card p{
+    color:var(--text-soft);
+    font-size:0.94rem;
+}
+
+/* ---------- SCREEN CARDS ---------- */
+
+.screen-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+}
+
+.screen-card .bar{
+    background:#F1EAD9;
+    padding:9px 14px;
+    display:flex;
+    gap:6px;
+    border-bottom:1px solid var(--border);
+}
+
+.screen-card .bar span{
+    width:8px;height:8px;border-radius:50%;
+    background:#D9CBAE;
+}
+
+.screen-card .body{padding:20px 20px 24px;}
+
+.screen-card h3{font-size:1.05rem;margin-bottom:6px;}
+.screen-card p{color:var(--text-soft);font-size:0.93rem;}
+
+/* ---------- CHECKLIST ---------- */
+
+.checklist{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:16px 30px;
+}
+
+.checklist .item{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    font-size:0.97rem;
+    color:var(--text);
+}
+
+.checklist .tick{
+    flex:none;
+    width:22px;height:22px;
+    border-radius:50%;
+    background:var(--sage);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.75rem;
+    margin-top:2px;
+}
+
+/* ---------- ROUTE / TIMELINE ---------- */
+
+.route{
+    position:relative;
+    padding-left:46px;
+}
+
+.route::before{
+    content:"";
+    position:absolute;
+    left:14px;top:6px;bottom:6px;
+    width:2px;
+    background:repeating-linear-gradient(to bottom, var(--border) 0 6px, transparent 6px 12px);
+}
+
+.route .stop{
+    position:relative;
+    padding-bottom:30px;
+}
+
+.route .stop:last-child{padding-bottom:0;}
+
+.route .marker{
+    position:absolute;
+    left:-46px;top:0;
+    width:28px;height:28px;
+    border-radius:50%;
+    border:2px solid var(--clay);
+    background:var(--paper);
+    color:var(--clay-dark);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:500;
+}
+
+.route .stop.done .marker{
+    background:var(--sage);
+    border-color:var(--sage);
+    color:#fff;
+}
+
+.route .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px 18px;
+}
+
+.route .card h3{font-size:1rem;margin-bottom:3px;}
+.route .card p{color:var(--text-soft);font-size:0.9rem;margin:0;}
+
+.route .stop.done .card{border-color:#CFE0C8;}
+
+/* ---------- OBJETIVO ---------- */
+
+.objective{
+    background:var(--ink);
+    color:#F3ECDD;
+    border-radius:18px;
+    padding:54px 7%;
+    text-align:left;
+}
+
+.objective p{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:clamp(1.3rem,2.6vw,1.7rem);
+    line-height:1.5;
+    max-width:760px;
+}
+
+.objective .highlight{
+    color:var(--clay);
+    font-style:normal;
+    font-weight:600;
+}
+
+/* ---------- INVESTIMENTO ---------- */
+
+.invest-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:22px;
+}
+
+.invest-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:28px 24px;
+    position:relative;
+}
+
+.invest-card.price{
+    border-color:var(--clay);
+    background:#FFFDF8;
+}
+
+.invest-card .stamp{
+    position:absolute;
+    top:22px;right:22px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.62rem;
+    letter-spacing:0.1em;
+    color:var(--clay);
+    border:1px solid var(--clay);
+    border-radius:3px;
+    padding:3px 7px;
+    transform:rotate(6deg);
+}
+
+.invest-card h3{font-size:1.08rem;margin-bottom:10px;}
+.invest-card p{color:var(--text-soft);font-size:0.92rem;}
+
+.invest-card .price-tag{
+    font-family:'Fraunces',serif;
+    font-size:2.3rem;
+    font-weight:700;
+    color:var(--clay-dark);
+    margin:16px 0 10px;
+}
+
+.invest-card ul{
+    padding-left:18px;
+    color:var(--text-soft);
+    font-size:0.92rem;
+}
+
+.invest-card ul li{margin-bottom:6px;}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+    background:var(--ink);
+    color:#CFD9CE;
+    padding:50px 0 44px;
+}
+
+footer .wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:18px;
+}
+
+footer h3{color:#FBF8F1;font-size:1.2rem;}
+
+.flow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.82rem;
+}
+
+.flow span.step{
+    background:rgba(243,236,221,0.08);
+    border:1px solid rgba(243,236,221,0.18);
+    padding:6px 12px;
+    border-radius:5px;
+}
+
+.flow span.arrow{
+    color:var(--clay);
+    align-self:center;
+}
+
+/* ---------- REVEAL ---------- */
+
+.reveal{
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in{opacity:1;transform:none;}
+
+@media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width:760px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-art{order:-1;max-width:200px;margin:0 auto;}
+    section{padding:48px 0;}
+    .objective{padding:38px 7%;}
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+    <div class="wrap hero-inner">
+        <div>
+            <span class="eyebrow">Proposta de desenvolvimento</span>
+            <h1>Sistema de Gestão Home Care</h1>
+            <p>
+                Um software feito sob medida para tirar o controle da empresa
+                das planilhas e colocar clientes, profissionais, atendimentos
+                e pagamentos em um único lugar.
+            </p>
+        </div>
+        <div class="hero-art">
+            <svg viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke="#7C9473" stroke-width="2.5" stroke-linecap="round">
+                    <rect x="14" y="20" width="80" height="100" rx="4" fill="#1F3A36" stroke="#3E5A53"/>
+                    <line x1="26" y1="40" x2="82" y2="40" stroke="#A3B89C"/>
+                    <line x1="26" y1="56" x2="82" y2="56" stroke="#A3B89C" opacity="0.7"/>
+                    <line x1="26" y1="72" x2="82" y2="72" stroke="#A3B89C" opacity="0.7"/>
+                    <line x1="26" y1="88" x2="82" y2="88" stroke="#A3B89C" opacity="0.7"/>
+                    <line x1="26" y1="104" x2="82" y2="104" stroke="#A3B89C" opacity="0.7"/>
+                </g>
+                <line x1="10" y1="14" x2="98" y2="126" stroke="#BF6A3F" stroke-width="3" stroke-linecap="round"/>
+                <path d="M104 70 L150 70" stroke="#D9A77C" stroke-width="2.5" marker-end="url(#arrow)"/>
+                <defs>
+                    <marker id="arrow" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
+                        <path d="M0,0 L8,4 L0,8 Z" fill="#D9A77C"/>
+                    </marker>
+                </defs>
+                <g>
+                    <rect x="156" y="34" width="54" height="68" rx="6" fill="#243F3B" stroke="#6F8F6A" stroke-width="2"/>
+                    <rect x="156" y="34" width="54" height="14" rx="6" fill="#3E5A53"/>
+                    <circle cx="166" cy="41" r="2" fill="#D9A77C"/>
+                    <line x1="166" y1="60" x2="200" y2="60" stroke="#A3C39A" stroke-width="2"/>
+                    <line x1="166" y1="72" x2="194" y2="72" stroke="#A3C39A" stroke-width="2"/>
+                    <line x1="166" y1="84" x2="200" y2="84" stroke="#A3C39A" stroke-width="2"/>
+                    <circle cx="161" cy="60" r="2.4" fill="#7C9473"/>
+                    <circle cx="161" cy="72" r="2.4" fill="#7C9473"/>
+                    <circle cx="161" cy="84" r="2.4" fill="#7C9473"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+</header>
+
+<section class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <span class="index">01</span>
+            <h2>Problema atual</h2>
+        </div>
+        <div class="scatter-grid">
+            <div class="note"><strong>Planilhas soltas</strong>Informações de clientes e profissionais espalhadas em arquivos separados.</div>
+            <div class="note"><strong>Atendimentos sem rastro</strong>Difícil acompanhar o que foi agendado, realizado e pendente.</div>
+            <div class="note"><strong>Financeiro manual</strong>Recebimentos e repasses calculados e conferidos à mão.</div>
+            <div class="note"><strong>Comprovantes perdidos</strong>Documentos e comprovantes guardados em lugares diferentes.</div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <span class="index">02</span>
+            <h2>Solução proposta</h2>
+        </div>
+        <p style="max-width:640px;color:var(--text-soft);margin-bottom:30px;">
+            Um sistema desktop exclusivo para a empresa, construído em torno de
+            quatro frentes que hoje vivem espalhadas.
+        </p>
+        <div class="folder-grid">
+            <div class="folder-card">
+                <span class="tab">Cadastro</span>
+                <h3>Clientes</h3>
+                <p>Cadastro completo e histórico de todos os atendimentos realizados.</p>
+            </div>
+            <div class="folder-card">
+                <span class="tab">Equipe</span>
+                <h3>Profissionais</h3>
+                <p>Contatos, dados bancários e histórico de serviços de cada profissional.</p>
+            </div>
+            <div class="folder-card">
+                <span class="tab">Agenda</span>
+                <h3>Serviços</h3>
+                <p>Controle dos atendimentos agendados, realizados e concluídos.</p>
+            </div>
+            <div class="folder-card">
+                <span class="tab">Caixa</span>
+                <h3>Financeiro</h3>
+                <p>Controle de pagamentos recebidos e repasses realizados.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <span class="index">03</span>
+            <h2>Telas do sistema</h2>
+        </div>
+        <div class="folder-grid">
+            <div class="screen-card">
+                <div class="bar"><span></span><span></span><span></span></div>
+                <div class="body"><h3>Dashboard</h3><p>Visão geral dos serviços, pagamentos e indicadores.</p></div>
+            </div>
+            <div class="screen-card">
+                <div class="bar"><span></span><span></span><span></span></div>
+                <div class="body"><h3>Clientes</h3><p>Dados cadastrais e histórico de serviços.</p></div>
+            </div>
+            <div class="screen-card">
+                <div class="bar"><span></span><span></span><span></span></div>
+                <div class="body"><h3>Profissionais</h3><p>Cadastro, pagamentos e atendimentos.</p></div>
+            </div>
+            <div class="screen-card">
+                <div class="bar"><span></span><span></span><span></span></div>
+                <div class="body"><h3>Serviços</h3><p>Lista completa dos atendimentos por período.</p></div>
+            </div>
+            <div class="screen-card">
+                <div class="bar"><span></span><span></span><span></span></div>
+                <div class="body"><h3>Detalhes do serviço</h3><p>Informações completas, comprovantes e feedback.</p></div>
+            </div>
+            <div class="screen-card">
+                <div class="bar"><span></span><span></span><span></span></div>
+                <div class="body"><h3>Financeiro</h3><p>Controle de recebimentos, repasses e pendências.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <span class="index">04</span>
+            <h2>Benefícios</h2>
+        </div>
+        <div class="checklist">
+            <div class="item"><span class="tick">✓</span>Menos tempo gasto com planilhas.</div>
+            <div class="item"><span class="tick">✓</span>Histórico completo de clientes.</div>
+            <div class="item"><span class="tick">✓</span>Controle financeiro simplificado.</div>
+            <div class="item"><span class="tick">✓</span>Organização dos comprovantes.</div>
+            <div class="item"><span class="tick">✓</span>Menor risco de erros.</div>
+            <div class="item"><span class="tick">✓</span>Informações centralizadas.</div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <span class="index">05</span>
+            <h2>Etapas do desenvolvimento</h2>
+        </div>
+        <div class="route">
+            <div class="stop done">
+                <div class="marker">✓</div>
+                <div class="card"><h3>Levantamento detalhado dos requisitos</h3><p>Concluído</p></div>
+            </div>
+            <div class="stop">
+                <div class="marker">2</div>
+                <div class="card"><h3>Criação do protótipo das telas</h3></div>
+            </div>
+            <div class="stop">
+                <div class="marker">3</div>
+                <div class="card"><h3>Desenvolvimento do sistema</h3></div>
+            </div>
+            <div class="stop">
+                <div class="marker">4</div>
+                <div class="card"><h3>Testes e ajustes</h3></div>
+            </div>
+            <div class="stop">
+                <div class="marker">5</div>
+                <div class="card"><h3>Implantação e treinamento</h3></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal">
+    <div class="wrap">
+        <div class="objective">
+            <span class="eyebrow" style="color:#D9A77C;">Objetivo final</span>
+            <p style="margin-top:14px;">
+                Transformar o controle operacional da empresa em um processo mais
+                <span class="highlight">rápido</span>, <span class="highlight">organizado</span> e
+                <span class="highlight">seguro</span> — acompanhando clientes, profissionais,
+                atendimentos e pagamentos em um único lugar.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <span class="index">06</span>
+            <h2>Investimento e implantação</h2>
+        </div>
+        <div class="invest-grid">
+            <div class="invest-card price">
+                <span class="stamp">Orçamento</span>
+                <h3>Desenvolvimento</h3>
+                <p>Sistema completo, personalizado para as necessidades atuais da empresa.</p>
+                <div class="price-tag">R$ 3.000,00</div>
+                <p>Inclui desenvolvimento, implantação e configuração inicial do software.</p>
+            </div>
+            <div class="invest-card">
+                <h3>Período de testes</h3>
+                <p>Após a entrega, o sistema fica em uso assistido durante <strong>3 meses</strong>.</p>
+                <br>
+                <p>Nesse período são feitos os ajustes, correções e melhorias necessários para adequar o sistema à rotina da empresa.</p>
+            </div>
+            <div class="invest-card">
+                <h3>Evolução contínua</h3>
+                <p>Depois do período de testes, a continuidade pode seguir de duas formas:</p>
+                <ul>
+                    <li>Assinatura mensal para suporte e melhorias.</li>
+                    <li>Contratação de melhorias pontuais conforme a necessidade.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap">
+        <h3>Próximos passos</h3>
+        <div class="flow">
+            <span class="step">Levantamento de requisitos</span>
+            <span class="arrow">→</span>
+            <span class="step">Desenvolvimento</span>
+            <span class="arrow">→</span>
+            <span class="step">Testes</span>
+            <span class="arrow">→</span>
+            <span class="step">Implantação</span>
+            <span class="arrow">→</span>
+            <span class="step">Evolução contínua</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+const els = document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){
+    const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+            if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+        });
+    },{threshold:0.12});
+    els.forEach(el=>obs.observe(el));
+} else {
+    els.forEach(el=>el.classList.add('in'));
+}
+</script>
+
+</body>
+</html>
